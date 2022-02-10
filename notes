@@ -1,0 +1,9 @@
+php artisan route:list
+liste les routes dans le controleur
+
+injection de dépendance, -> une class qui a besoin de l'instance d'une class pour être instancier
+
+creer une table -> php artisan make:migration "nomde la table" -> ensuite dans les migration dans le dossier database la fontion up représente les tables
+ensuite php artisan migrate
+Pour le model
+php artisan make:model Post(doit etre comforme a la syntaxe de class)
