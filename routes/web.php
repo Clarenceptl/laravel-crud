@@ -22,6 +22,7 @@ use App\Http\Controllers\PanierController;
 Route::get('/', function () {
    return view('accueil');
 })->middleware(['auth'])->name('accueil');
+
 Route::get('/films',[FilmController::class, 'home'])
    ->middleware(['auth'])->name('films');
 

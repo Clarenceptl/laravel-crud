@@ -1,12 +1,49 @@
+-- phpMyAdmin SQL Dump
+-- version 3.4.3.2
+-- http://www.phpmyadmin.net
+--
+-- Client: localhost
+-- Généré le : Ven 02 Décembre 2011 à 11:35
+-- Version du serveur: 5.1.49
+-- Version de PHP: 5.3.3-7+squeeze3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-DROP DATABASE IF EXISTS`laravel`;
-CREATE DATABASE `laravel` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `laravel`;
-DROP TABLE IF EXISTS `distributeurs`;
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de données: `cinema`
+--
+DROP DATABASE IF EXISTS`cinema`;
+CREATE DATABASE `cinema` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `cinema`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `abonnements`
+--
+
+DROP TABLE IF EXISTS `abonnements`;
+CREATE TABLE IF NOT EXISTS `abonnements` (
+  `id_abonnement` int(11) NOT NULL AUTO_INCREMENT,
+  `id_forfait` int(11) NOT NULL,
+  `debut` datetime NOT NULL,
+  PRIMARY KEY (`id_abonnement`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `distributeurs`
+--
+
+DROP TABLE IF EXISTS `distributeurs`;
 CREATE TABLE IF NOT EXISTS `distributeurs` (
   `id_distributeur` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -17,6 +54,10 @@ CREATE TABLE IF NOT EXISTS `distributeurs` (
   `pays` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_distributeur`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=92 ;
+
+--
+-- Contenu de la table `distributeurs`
+--
 
 INSERT INTO `distributeurs` (`id_distributeur`, `nom`, `telephone`, `adresse`, `cpostal`, `ville`, `pays`) VALUES
 (1, 'gimages', '146952611', NULL, NULL, NULL, NULL),
@@ -111,6 +152,12 @@ INSERT INTO `distributeurs` (`id_distributeur`, `nom`, `telephone`, `adresse`, `
 (90, 'lagoon entertainment', '285416566', NULL, NULL, NULL, NULL),
 (91, 'Marc dorcel production', '836656565', NULL, NULL, NULL, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `employes`
+--
+
 DROP TABLE IF EXISTS `employes`;
 CREATE TABLE IF NOT EXISTS `employes` (
   `id_employe` int(11) NOT NULL AUTO_INCREMENT,
@@ -118,6 +165,10 @@ CREATE TABLE IF NOT EXISTS `employes` (
   `id_fonction` int(11) NOT NULL,
   PRIMARY KEY (`id_employe`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=41 ;
+
+--
+-- Contenu de la table `employes`
+--
 
 INSERT INTO `employes` (`id_employe`, `id_personne`, `id_fonction`) VALUES
 (1, 1, 6),
@@ -161,6 +212,11 @@ INSERT INTO `employes` (`id_employe`, `id_personne`, `id_fonction`) VALUES
 (39, 142, 2),
 (40, 144, 2);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `films`
+--
 
 DROP TABLE IF EXISTS `films`;
 CREATE TABLE IF NOT EXISTS `films` (
@@ -178,6 +234,9 @@ CREATE TABLE IF NOT EXISTS `films` (
   KEY `id_genre` (`id_genre`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3647 ;
 
+--
+-- Contenu de la table `films`
+--
 
 INSERT INTO `films` (`id_film`, `id_genre`, `id_distributeur`, `titre`, `resum`, `date_debut_affiche`, `date_fin_affiche`, `duree_minutes`, `annee_production`) VALUES
 (1, 0, NULL, 'Goodfellas', 'Based on Nicholas Pileggi''s book ''Wiseguy'' this is a film about the life of Henry Hill, an aspiring criminal who ends up in the FBI''s witness protection program after testifying against his former partners.', '1990-01-01', '1990-02-12', 146, 1990),
@@ -358,7 +417,6 @@ INSERT INTO `films` (`id_film`, `id_genre`, `id_distributeur`, `titre`, `resum`,
 (176, 17, NULL, 'I know What You Did Last Summer', 'Three friends accidently hit and kill someone while they are driving drunk. They opt not to tell anyone about the murder and, in time, they pretend to forget about it. Their crime comes back to haunt them the following summer when they each', '1997-12-12', '1998-01-16', 99, 1997),
 (177, 3, NULL, 'Tomorrow Never Dies', 'British super spy James Bond goes after a ruthless media baron--an amalgam of Ted Turner, Rupert Murdoch, and Bill Gates, played with feisty aplomb by Pryce--whose diabolical plans include instigating World War III so that his empire can ob', '1997-12-12', '1998-01-30', 119, 1996),
 (178, 10, NULL, 'Free Willy 3: the Rescue', 'The whale of August returns, to find friendship, paternity and peril from unscrupulous whalers. As surprising as low tide.', '1997-12-17', '1998-01-07', 95, 1997);
-
 INSERT INTO `films` (`id_film`, `id_genre`, `id_distributeur`, `titre`, `resum`, `date_debut_affiche`, `date_fin_affiche`, `duree_minutes`, `annee_production`) VALUES
 (179, 10, NULL, 'George of the Jungle', 'Ursula Stanhope has travelled to Bukuvu from San Francisco is search of adventure. Her intended, Lyle Van de Groot, pursues her in hopes of capturing the legendary White Ape who is supposed to exist in the mountains. Ultimately, a romance b', '1997-12-19', '1998-01-30', 92, 1997),
 (180, 6, NULL, 'Home Alone 3', 'Alex D. Linz replaces that other kid and there''s a new cast of villains, but the formula remains the same.', '1997-12-19', '1998-01-16', 100, 1997),
@@ -3359,7 +3417,7 @@ INSERT INTO `films` (`id_film`, `id_genre`, `id_distributeur`, `titre`, `resum`,
 (3158, 18, 47, 'Joy Division', 'Thomas, a teenager, is forced to battle against the Red Army in the last days of WW2.  He meets a young woman named Astrid and the two flee westwards.  Thomas is captured by the Russians and disappears.  Years later, after graduating from a', '2006-11-17', '2006-12-15', 104, 2006),
 (3159, 3, 48, 'Special', 'Les Franken leads a painfully unremarkable life as a traffic enforcement officer until he enrolls in a drug study for an experimental anti-depressant. An unexpected side effect of the drug convinces Les that he is developing special powers ', '2006-11-17', '2007-01-05', 81, 2006),
 (3160, 3, 49, 'Requiem', 'Requiem is loosely based upon the true story of a young woman who leaves her strictly religious and overprotective German home to go off to study at university.  At first she basks in her first taste of freedom, making friends and experienc', '2006-11-17', '2006-12-29', 92, 2006),
-(3161, 8, NULL, 'Dhoom 2', 'After committing high profile crimes all over the world, Mr (Hrithik Roshan) a hi-tech international criminal has set his sights on Mumbai. Police officer Jai Dixit (Abhishek Bachchan) and Ali (Uday Chopra) are given the assignment ', '2006-11-17', '2007-01-12', 152, 2006),
+(3161, 8, NULL, 'Dhoom 2', 'After committing high profile crimes all over the world, Mr €œA€ (Hrithik Roshan) a hi-tech international criminal has set his sights on Mumbai. Police officer Jai Dixit (Abhishek Bachchan) and Ali (Uday Chopra) are given the assignment ', '2006-11-17', '2007-01-12', 152, 2006),
 (3162, 3, 40, 'Gabrielle', 'Jean is a wealthy publisher and live in 1890''s Paris, in an opulent home with his beautiful wife and picture perfect lifestyle.  One day Jean discovers a letter from his wife, Gabrielle, informing him that she is leaving him for her lover, ', '2006-11-17', '2006-12-22', 90, 2004),
 (3163, 9, 8, 'Antibodies', 'A serial killer is caught after a violent shoot out with police. However, there is still an unsolved murder of a young girl in a small town. Could he have done it? Or, could he be the key to finding out who did? A mind game ensues between t', '2006-11-17', '2006-12-15', 127, 2005),
 (3164, 28, NULL, 'We Shall Overcome', 'It''s 1969 in provincial Denmark and 13 year old Frits is being bullied by his headmaster, trying to cope with his father''s breakdown and somehow keep his family together as well. Listening to records of Martin Luther King''s speeches gives F', '2006-11-17', '2006-12-08', 109, 2005),
@@ -3848,6 +3906,12 @@ INSERT INTO `films` (`id_film`, `id_genre`, `id_distributeur`, `titre`, `resum`,
 (3645, 15, 68, 'I Don''t Want to Sleep Alone', 'Shooting for the first time in Malaysia after 7 features set primarily in Taipei, director Tsai Ming-Liang returns to his birthplace with a film unlike any of his prior works. Different in texture, mood and feel, and featuring a cast of mul', '2007-11-16', '2007-12-14', 115, 2006),
 (3646, 3, 46, 'Brick Lane', 'Monica Ali''s best-selling novel comes to the screen in this faithful adaptation, directed by Sarah Gavron, making her feature film debut. Set in the 1980s, BRICK LANE follows the trials and tribulations of a beautiful young Bangladeshi woma', '2007-11-16', '2008-01-11', 101, 2007);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `fonctions`
+--
+
 DROP TABLE IF EXISTS `fonctions`;
 CREATE TABLE IF NOT EXISTS `fonctions` (
   `id_fonction` int(11) NOT NULL AUTO_INCREMENT,
@@ -3869,12 +3933,38 @@ INSERT INTO `fonctions` (`id_fonction`, `nom`, `salaire`, `cadre`) VALUES
 (5, 'agent sécurité', '20000', 0),
 (6, 'agent entretien', '25000', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `forfaits`
+--
+
+DROP TABLE IF EXISTS `forfaits`;
+CREATE TABLE IF NOT EXISTS `forfaits` (
+  `id_forfait` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `resum` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `prix` int(11) NOT NULL,
+  `duree_jours` int(11) NOT NULL,
+  PRIMARY KEY (`id_forfait`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `genres`
+--
+
 DROP TABLE IF EXISTS `genres`;
 CREATE TABLE IF NOT EXISTS `genres` (
   `id_genre` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_genre`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=31 ;
+
+--
+-- Contenu de la table `genres`
+--
 
 INSERT INTO `genres` (`id_genre`, `nom`) VALUES
 (0, 'detective'),
@@ -3908,6 +3998,42 @@ INSERT INTO `genres` (`id_genre`, `nom`) VALUES
 (28, 'family'),
 (29, 'expérimental');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `historique_membre`
+--
+
+DROP TABLE IF EXISTS `historique_membre`;
+CREATE TABLE IF NOT EXISTS `historique_membre` (
+  `id_historique` int(11) NOT NULL AUTO_INCREMENT,
+  `id_membre` int(11) NOT NULL,
+  `id_seance` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id_historique`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `membres`
+--
+
+DROP TABLE IF EXISTS `membres`;
+CREATE TABLE IF NOT EXISTS `membres` (
+  `id_membre` int(11) NOT NULL AUTO_INCREMENT,
+  `id_personne` int(11) NOT NULL,
+  `id_abonnement` int(11) NOT NULL,
+  `date_inscription` datetime NOT NULL,
+  `debut_abonnement` datetime NOT NULL,
+  PRIMARY KEY (`id_membre`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `personnes`
+--
 
 DROP TABLE IF EXISTS `personnes`;
 CREATE TABLE IF NOT EXISTS `personnes` (
@@ -3922,6 +4048,10 @@ CREATE TABLE IF NOT EXISTS `personnes` (
   `pays` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_personne`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=201 ;
+
+--
+-- Contenu de la table `personnes`
+--
 
 INSERT INTO `personnes` (`id_personne`, `nom`, `prenom`, `date_naissance`, `email`, `adresse`, `cpostal`, `ville`, `pays`) VALUES
 (1, 'SOLEVIC', 'alexis', '1997-01-05', 'solevic.alexis@lycos.fr', '', '94170', 'LE PERREUX SUR MARNE', 'France'),
@@ -4125,6 +4255,27 @@ INSERT INTO `personnes` (`id_personne`, `nom`, `prenom`, `date_naissance`, `emai
 (199, 'SARIEGO', 'haitham', '1997-02-01', 'sariego.haitham@laposte.net', '', '77160', 'POIGNY', 'France'),
 (200, 'BEAULE', 'pascal', '1972-03-05', 'beaule.pascal@yahoo.com', '', '78580', 'JUMEAUVILLE', 'France');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reductions`
+--
+
+DROP TABLE IF EXISTS `reductions`;
+CREATE TABLE IF NOT EXISTS `reductions` (
+  `id_reduction` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `date_debut` datetime NOT NULL,
+  `date_fin` datetime NOT NULL,
+  `pourcentage_reduction` int(11) NOT NULL,
+  PRIMARY KEY (`id_reduction`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `salles`
+--
 
 DROP TABLE IF EXISTS `salles`;
 CREATE TABLE IF NOT EXISTS `salles` (
@@ -4136,6 +4287,9 @@ CREATE TABLE IF NOT EXISTS `salles` (
   PRIMARY KEY (`id_salle`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
 
+--
+-- Contenu de la table `salles`
+--
 
 INSERT INTO `salles` (`id_salle`, `numero_salle`, `nom_salle`, `etage_salle`, `places`) VALUES
 (1, 1, 'Martin Scorsese', 0, 135),
@@ -4153,3 +4307,26 @@ INSERT INTO `salles` (`id_salle`, `numero_salle`, `nom_salle`, `etage_salle`, `p
 (13, 13, 'David Lynch', 2, 89),
 (14, 14, 'Robert Redford', 2, 225),
 (15, 15, 'Ridley Scott', 3, 225);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `seances`
+--
+
+DROP TABLE IF EXISTS `seances`;
+CREATE TABLE IF NOT EXISTS `seances` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_film` int(11) NOT NULL,
+  `id_salle` int(11) NOT NULL,
+  `id_personne_ouvreur` int(11) NOT NULL,
+  `id_personne_technicien` int(11) NOT NULL,
+  `id_personne_menage` int(11) NOT NULL,
+  `debut_seance` datetime NOT NULL,
+  `fin_seance` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
