@@ -54,11 +54,13 @@ services:
       - 8080:8080
 
   selenium:
-    image: 'selenium/standalone-chrome'
+    image: 'seleniarm/standalone-chromium'
     volumes:
         - '/dev/shm:/dev/shm'
     networks:
         - sail
+    # ports:
+    #   - 4444:4444
 
 networks:
   sail:

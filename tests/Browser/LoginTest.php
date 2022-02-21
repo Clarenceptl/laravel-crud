@@ -17,14 +17,10 @@ class LoginTest extends DuskTestCase
     public function testExample()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                    ->assertSee('Email');
-                    // ->loginAs(User::find(1))
-                    // ->assertVisible('#filmList')
-                    // ->visit(
-                    //     $browser->attribute('#filmList', 'href')
-                    // )
-                    // ->assertPathIs('/films');
+            $browser->loginAs(User::find(1))
+                    ->visit('/')
+                    // ->assertPathIs('/films')
+                    ->waitForText('Bienvenue');
         });
     }
 }
