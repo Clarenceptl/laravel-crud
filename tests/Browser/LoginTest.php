@@ -9,15 +9,16 @@ use Laravel\Dusk\Browser;
 class LoginTest extends DuskTestCase
 {
     /**
-     *  Login test.
+     *  Login/logout admin test.
      *
      * @return void
      */
 
-    public function test_login()
+    public function testLoginAndLogout()
     {
-        $user = User::factory()->create([
-            'email' => 'taylor@laravel.com'
+        $user = User::factory()->create([   //créer un utilisateur admin
+            'email' => 'taylor@laravel.com',
+            'utype' =>'admin'
         ]);
 
         $this->browse(function ($browser) use ($user) {
@@ -25,7 +26,8 @@ class LoginTest extends DuskTestCase
                     ->type('email', $user->email)
                     ->type('password', 'password')
                     ->press('LOG IN')
-                    ->assertPathIs('/');
+                    ->assertPathIs('/')
+                    ->logout();
         });
 
         $user->delete();

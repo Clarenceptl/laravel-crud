@@ -28,4 +28,30 @@ class RegisterTest extends DuskTestCase
 
         User::where("email",'test1@test.com')->first()->delete();
     }
+
+    /**
+     * A Dusk register failed test.
+     *
+     * @return void
+     */
+    public function testRegisterFail()
+    {
+        $user = User::factory()->create([   //créer un utilisateur user
+            'email' => 'register@laravel.com',
+        ]);
+
+        $this->browse(function ($browser) {
+            $browser->visit('/register')
+                    ->type('name', 'Nom prénom')
+                    ->type('email', 'register@laravel.com')
+                    ->type('password', 'password')
+                    ->type('password_confirmation', 'password')
+                    ->click('button')
+                    ->assertSee('Whoops! Something went wrong')
+                    ->assertSee('The email has already been taken.');
+
+        });
+
+        $user->delete();
+    }
 }

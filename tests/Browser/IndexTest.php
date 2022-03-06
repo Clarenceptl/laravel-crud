@@ -15,13 +15,12 @@ class IndexTest extends DuskTestCase
      */
     public function testIndexOk()
     {
-        // $this->browse(function (Browser $browser) {
-        //     $browser->loginAs(User::find(1))
-        //             ->visit('/')
-        //             ->assertSee('Bienvenue sur la page d\'accueil')
-        //             ->clickLink('ici')
-        //             ->assertPathIs('/films');
-
-        // });
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs(User::find(1))
+                    ->visit('/')
+                    ->assertSee('Bienvenue sur la page d\'accueil')
+                    ->clickLink('ici')
+                    ->assertPathIs('/films');
+         });
     }
 }
