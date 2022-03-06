@@ -6,14 +6,14 @@ use App\Models\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 
-class TokenTest extends DuskTestCase
+class FilmTest extends DuskTestCase
 {
     /**
      *  Index working test.
      *
      * @return void
      */
-    public function testGetFreeToken()
+    public function testFilm()
     {
         try{
             $user = User::factory()->create([   //créer un utilisateur admin
@@ -21,14 +21,16 @@ class TokenTest extends DuskTestCase
                 'name'=> 'name',
                 'utype' => 'admin'
             ]);
+            /*$user->jeton = 1000;
+            $user->save();
+            ->press('+ Ajouter au panier')
+            ->waitForText('/panier')
+
+            ->waitForText('Back to the Future Part III');*/
             $this->browse(function ($browser) use ($user) {
                 $browser->loginAs($user)
-                    ->visit('/getfreetoken')
-                    ->assertSee('Hello '.$user->name)
-                    ->press('Argent facile')
-                    ->assertPathIs('/getfreetoken')
-                    ->waitForText('+ 50 balles pour monsieur')
-                    ->assertSee('Jeton: 50');
+                    ->visit('/film')
+                    ->assertPresent('@film-list');
             });
         }finally{
             $user->delete();

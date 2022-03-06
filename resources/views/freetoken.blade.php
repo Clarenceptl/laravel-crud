@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="py-12">
         @if (session('status'))
-        <div style="color: green; font-weight: bold;text-align: center;font-size:30px">
+        <div style="color: green; font-weight: bold;text-align: center;font-size:30px" dusk="status">
             {{ session('status') }}
         </div>
         @endif

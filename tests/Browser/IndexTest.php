@@ -15,12 +15,21 @@ class IndexTest extends DuskTestCase
      */
     public function testIndexOk()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+        try{
+            $user = User::factory()->create([   //créer un utilisateur admin
+                'email' => 'taylor@laravel.com',
+                'utype' =>'admin'
+            ]);
+
+            $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
                     ->visit('/')
                     ->assertSee('Bienvenue sur la page d\'accueil')
                     ->clickLink('ici')
                     ->assertPathIs('/films');
-         });
+            });
+        }finally{
+            $user->delete();
+        }
     }
 }

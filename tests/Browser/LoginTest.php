@@ -16,20 +16,22 @@ class LoginTest extends DuskTestCase
 
     public function testLoginAndLogout()
     {
-        $user = User::factory()->create([   //créer un utilisateur admin
-            'email' => 'taylor@laravel.com',
-            'utype' =>'admin'
-        ]);
+        try{
+            $user = User::factory()->create([   //créer un utilisateur admin
+                'email' => 'taylor@laravel.com',
+                'utype' =>'admin'
+            ]);
 
-        $this->browse(function ($browser) use ($user) {
-            $browser->visit('/login')
-                    ->type('email', $user->email)
-                    ->type('password', 'password')
-                    ->press('LOG IN')
-                    ->assertPathIs('/')
-                    ->logout();
-        });
-
-        $user->delete();
+            $this->browse(function ($browser) use ($user) {
+                $browser->visit('/login')
+                        ->type('email', $user->email)
+                        ->type('password', 'password')
+                        ->press('LOG IN')
+                        ->assertPathIs('/')
+                        ->logout();
+            });
+        }finally{
+            $user->delete();
+        }
     }
 }
