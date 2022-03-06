@@ -27,7 +27,7 @@ class CreateFilmsTable extends Migration {
 			$table->integer('price')->default(0);
 			$table->timestamps(6);
 			$table->boolean('reserved')->default(0);
-			$table->integer('Rate');
+			$table->integer('Rate')->default(0);
 			$table->string('image_path');
 		});
 	}

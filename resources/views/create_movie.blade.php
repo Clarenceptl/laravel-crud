@@ -9,11 +9,11 @@
                     @csrf
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Titre</label>
-                            <input type="text" class="form-control" id="inputEmail4" name="title" required="required">
+                            <input type="text"  class="form-control" id="inputEmail4" name="title" required="required">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Image</label>
-                            <input type="file" class="form-control" id="inputEmail4" name="image" required="required">
+                            <input type="file"  class="form-control" id="inputEmail4" name="image" required="required">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Résumé du film</label>
@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">Durée du film(minutes)</label>
-                            <input type="number" class="form-control" id="inputCity" name="duration" required="required">
+                            <input type="number" dusk="@duration" class="form-control" id="inputCity" name="duration" required="required">
                         </div>
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">Année de production</label>

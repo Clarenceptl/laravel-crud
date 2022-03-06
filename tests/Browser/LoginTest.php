@@ -5,9 +5,16 @@ namespace Tests\Browser;
 use App\Models\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LoginTest extends DuskTestCase
 {
+    use DatabaseMigrations;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
     /**
      *  Login/logout admin test.
      *
@@ -16,22 +23,18 @@ class LoginTest extends DuskTestCase
 
     public function testLoginAndLogout()
     {
-        try{
-            $user = User::factory()->create([   //créer un utilisateur admin
-                'email' => 'taylor@laravel.com',
-                'utype' =>'admin'
-            ]);
+        $user = User::factory()->create([   //créer un utilisateur admin
+            'email' => 'taylor@laravel.com',
+            'utype' =>'admin'
+        ]);
 
-            $this->browse(function ($browser) use ($user) {
-                $browser->visit('/login')
-                        ->type('email', $user->email)
-                        ->type('password', 'password')
-                        ->press('LOG IN')
-                        ->assertPathIs('/')
-                        ->logout();
-            });
-        }finally{
-            $user->delete();
-        }
+        $this->browse(function ($browser) use ($user) {
+            $browser->visit('/login')
+                    ->type('email', $user->email)
+                    ->type('password', 'password')
+                    ->press('LOG IN')
+                    ->assertPathIs('/')
+                    ->logout();
+        });
     }
 }

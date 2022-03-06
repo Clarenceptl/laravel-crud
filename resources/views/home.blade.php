@@ -42,10 +42,10 @@
                 {{ session('alert') }}
             </div>
         @endif
-        <div class="row mt-5">
+        <div class="row mt-5" dusk="film-list">
         @foreach($films as $film)
                 <div class="col-sm-4 mb-8">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: 18rem;" dusk="film-{{ $film->id_film }}">
                         @if(!$film->image_path)
                             <img src="https://via.placeholder.com/350" class="card-img-top" alt="...">
                         @else
@@ -56,11 +56,11 @@
                             <!-- <p class="card-text">{{ $film->resum}}</p> -->
 
                             @if (Auth::user()->utype === "admin")
-                            <a href="delete/{{ $film->id_film }}" class="btn btn-danger">Supprimer</a>
+                            <a href="delete/{{ $film->id_film }}" dusk="film-delete-{{ $film->id_film }}"class="btn btn-danger">Supprimer</a>
                             @endif
 
 
-                            <a href="film/{{ $film->id_film }}" class="btn btn-primary">Détail</a>
+                            <a href="film/{{ $film->id_film }}" dusk="film-link-{{ $film->id_film }}"class="btn btn-primary">Détail</a>
                         </div>
                     </div>
                 </div>

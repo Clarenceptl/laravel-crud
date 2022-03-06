@@ -57,7 +57,7 @@
 
         <!-- Lien pour vider le panier -->
         <a class="btn btn-danger" href="{{ route('panier.empty') }}" title="Retirer tous les produits du panier" >Vider le panier</a>
-        <a class="btn btn-primary" href="{{ route('panier.paiement')}}">Paiement</a>
+        <a class="btn btn-primary" dusk="payCart" href="{{ route('panier.paiement')}}">Paiement</a>
 
         @else
         <div class="alert alert-info">Aucun produit au panier</div>

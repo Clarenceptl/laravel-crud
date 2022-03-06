@@ -5,9 +5,17 @@ namespace Tests\Browser;
 use App\Models\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class RegisterTest extends DuskTestCase
 {
+
+    use DatabaseMigrations;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
     /**
      * A Dusk register test.
      *
@@ -23,10 +31,9 @@ class RegisterTest extends DuskTestCase
                     ->type('password', 'password')
                     ->type('password_confirmation', 'password')
                     ->click('button')
-                    ->assertPathIs('/');
+                    ->assertPathIs('/')
+                    ->logout();
         });
-
-        User::where("email",'test1@test.com')->first()->delete();
     }
 
     /**
@@ -36,24 +43,20 @@ class RegisterTest extends DuskTestCase
      */
     public function testRegisterFail()
     {
-        try{
-            $user = User::factory()->create([   //créer un utilisateur user
-                'email' => 'register@laravel.com',
-            ]);
+        $user = User::factory()->create([   //créer un utilisateur user
+            'email' => 'register@laravel.com',
+        ]);
 
-            $this->browse(function ($browser) use ($user) {
-                $browser->visit('/register')
-                        ->type('name', 'Nom prénom')
-                        ->type('email', $user->email)
-                        ->type('password', 'password')
-                        ->type('password_confirmation', 'password')
-                        ->click('button')
-                        ->assertSee('Whoops! Something went wrong')
-                        ->assertSee('The email has already been taken.');
+        $this->browse(function ($browser) use ($user) {
+            $browser->visit('/register')
+                    ->type('name', 'Nom prénom')
+                    ->type('email', $user->email)
+                    ->type('password', 'password')
+                    ->type('password_confirmation', 'password')
+                    ->click('button')
+                    ->assertSee('Whoops! Something went wrong')
+                    ->assertSee('The email has already been taken.');
 
-            });
-        }finally{
-            $user->delete();
-        }
+        });
     }
 }

@@ -31,7 +31,7 @@
                             @csrf
                             <input type="hidden" value="{{$total}}" name='total'>
                             <input type="hidden" value="$" name='id_films'>
-                            <button type="submit" class="btn btn-primary">Payer</button>
+                            <button type="submit" dusk="pay" class="btn btn-primary">Payer</button>
                         </form> --}}
                         @else
                         <div class="alert alert-info">Aucun produit à payer</div>

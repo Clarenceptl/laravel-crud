@@ -39,8 +39,8 @@ class PanierController extends Controller
 
                 $user->save();
                 $film->save();
-                $email = new EmailController;
-                $email->testMail();
+                // $email = new EmailController;
+                // $email->testMail();
             }
 
             return redirect(route('panier.empty'))->with('status','Paiement accepté');
