@@ -10,3 +10,7 @@
 8- dl https://github.com/karatelabs/karate/releases/download/v1.1.0/karate-1.1.0.zip
 9- copy karate.jar in karate-1.1.0
 10- run karate tests : cd karate-1.1.0 && java -cp 'karate.jar':. com.intuit.karate.Main -f ~html,cucumber:json .
+
+repo des solutions pour notre prob de bdd :
+- oscarafdev/migrations-generator
+- orangehill/iseed
