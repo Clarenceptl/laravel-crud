@@ -32,12 +32,12 @@ class FilmController extends Controller
         return view('films',['films'=>$films]);
     }
 
-    // function show(Request $request)
-    // {
-    //     //affiche un film spécifique
-    //     $film = Film::find($request->id_film);
-    //     return view('film',['film'=>$film]);
-    // }
+    public function api_get()
+    {
+        $films = Film::all();
+        return array('films'=>$films);
+    }
+
     public function showFreeToken()
     {
         $user = Auth::user()->name;
@@ -47,22 +47,7 @@ class FilmController extends Controller
         // dans blade {{ $username }}
         return view('freetoken',$data);
     }
-    // //update post
-    // function update(Request $request)
-    // {
-    //     $post=User::find($request->id_post);
 
-    //     return view('updatePost',['post'=>$post]);
-    // }
-
-    //  // met a jour le post
-    //  function save(Request $request)
-    //  {
-    //     $post=Post::find($request->id);
-    //     $post->content=$request->content;
-    //     $post->save();
-    //     return redirect('wall')->with('status','Post updated');
-    //  }
     public function postFreeToken()
     {
         $user_id = Auth::user()->id;
@@ -116,17 +101,17 @@ class FilmController extends Controller
 
 
 
-    
+
     public function store(Request $request) {
 
         $request->validate([
             'title' =>'required',
             'image' => 'required|mimes:jpg,png,jpeg|max:5048'
-            
+
         ]);
 
         $newImageName = time() . '-' . $request->title . '.' . $request->image->extension();
-        
+
         $request->image->move(public_path('images'), $newImageName);
 
 
@@ -153,6 +138,6 @@ class FilmController extends Controller
         $film->Rate = $request->id;
         $film->save();
         return redirect('films')->with('alert','Vôtre note a bien été envoyé !');
-        
-    } 
+
+    }
 }

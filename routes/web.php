@@ -23,6 +23,8 @@ Route::get('/', function () {
    return view('accueil');
 })->middleware(['auth'])->name('accueil');
 
+Route::get('/api/films', [FilmController::class, 'api_get'])->name('api_films');
+
 Route::get('/films',[FilmController::class, 'home'])
    ->middleware(['auth'])->name('films');
 
